@@ -1,24 +1,26 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.13;
+pragma solidity ^0.8.0;
 
-contract Handlingtheerror {
-    uint public money=50;
+contract ErrorHandlingContract {
+    uint256 public num;
 
-    function extract(uint price) public   {
-        require(money > price, "I does not have enough money");
-        money -= price;
+    function requireExample(uint256 _num) public {
+        require(_num > 0, "Number must be greater than 0");
+        
+        num = _num;
     }
 
-    function stake(uint price) public   {
-        money += price;
-        if (money > 100) {
-            revert("my money can not have more than 100");
+    function assertExample(uint256 _num) public {
+        assert(_num != 0);
+        
+        num = _num;
+    }
+
+    function revertExample(uint256 _num) public {
+        if (_num == 0) {
+            revert("Number cannot be 0");
         }
+        
+        num = _num;
     }
-
-    function isempty() public view returns (string memory){
-        assert(money == 0);
-        return "Yes, I has no money";
-    }
-
 }
